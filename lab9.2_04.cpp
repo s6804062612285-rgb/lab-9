@@ -22,17 +22,22 @@ int main() {
 int checkValidPass(char *ps) {
     int len = strlen(ps);
     int upper = 0, digit = 0;
-    int i;
+    int i, j;
     if (len < 5 || len > 8) return 0;
-    if (isdigit(ps[0])) return 0; 
+    if (isdigit(ps[0])) return 0;
     for (i = 0; i < len; i++) {
-        if (isupper(ps[i])) upper++;
+        if (isupper(ps[i])) {
+            upper++;
+            
+            for (j = 0; j < i; j++) {
+                if (ps[i] == ps[j]) return 0;
+            }
+        }
         if (isdigit(ps[i])) digit++;
     }
 
-    if (upper >= 2 && digit >= 2) return 1; 
+    if (upper >= 2 && digit >= 2) return 1;
     else return 0;
-
 }
 
 int checkLogin(char *login, char *passwd) {
