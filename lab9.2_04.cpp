@@ -21,16 +21,18 @@ int main() {
 
 int checkValidPass(char *ps) {
     int len = strlen(ps);
-    int hasDigit = 0;
+    int upper = 0, digit = 0;
     int i;
-    if (len != 5) return 0;
+    if (len < 5 || len > 8) return 0;
+    if (isdigit(ps[0])) return 0; 
     for (i = 0; i < len; i++) {
-        if (isdigit(ps[i])) {
-            hasDigit = 1;
-            break;
-        }
+        if (isupper(ps[i])) upper++;
+        if (isdigit(ps[i])) digit++;
     }
-    return hasDigit;
+
+    if (upper >= 2 && digit >= 2) return 1; 
+    else return 0;
+
 }
 
 int checkLogin(char *login, char *passwd) {
